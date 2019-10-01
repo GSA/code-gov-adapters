@@ -28,7 +28,8 @@ npm i @code.gov/code-gov-adapters
 ```
 ## Questions?
 
-Twitter: [@CodeDotGov](https://twitter.com/CodeDotGov)
-Email: code@gsa.gov
-LinkedIn: [code-gov](https://www.linkedin.com/company/code-gov)
+* Twitter: [@CodeDotGov](https://twitter.com/CodeDotGov)
+* Email: [code@gsa.gov](mailto:code@gsa.gov)
+* LinkedIn: [code-gov](https://www.linkedin.com/company/code-gov/)
+
 Join our #opensource-public Slack channel: https://chat.18f.gov/
