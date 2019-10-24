@@ -1,11 +1,9 @@
 version: 2
-defaults: &defaults
-  working_directory: ~/code-gov-adapters
-  docker:
-    - image: circleci/node:10.14.1
 jobs:
   build:
-    <<: *defaults
+    working_directory: ~/code-gov-adapters
+    docker:
+      - image: circleci/node:lts-jessie
     steps:
       - checkout
       - restore_cache:
@@ -27,7 +25,9 @@ jobs:
           root: ~/code-gov-adapters
           paths: .
   test:
-    <<: *defaults
+    working_directory: ~/code-gov-adapters
+    docker:
+      - image: circleci/node:lts-jessie
     environment:
       NODE_ENV: "testing"
     steps:
@@ -62,7 +62,9 @@ jobs:
           root: ~/code-gov-adapters
           paths: .
   publish:
-    <<: *defaults
+    working_directory: ~/code-gov-adapters
+    docker:
+      - image: circleci/node:lts-jessie
     steps:
       - attach_workspace:
           at: ~/code-gov-adapters
