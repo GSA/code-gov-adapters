@@ -1,11 +1,17 @@
 version: 2
-defaults: &defaults
-  working_directory: ~/code-gov-adapters
-  docker:
-    - image: circleci/node:10.8.0
 jobs:
   build:
-    <<: *defaults
+    working_directory: ~/code-gov-adapters
+    docker:
+      - image: circleci/node:lts-jessie
+      - image: docker.elastic.co/elasticsearch/elasticsearch:5.6.16
+        environment:
+          - cluster.name: es
+          - xpack.security.enabled: false
+          - transport.host: localhost
+          - network.host: 127.0.0.1
+          - http.port: 9250
+          - discovery.type: single-node
     steps:
       - checkout
       - restore_cache:
@@ -27,7 +33,17 @@ jobs:
           root: ~/code-gov-adapters
           paths: .
   test:
-    <<: *defaults
+    working_directory: ~/code-gov-adapters
+    docker:
+      - image: circleci/node:lts-jessie
+      - image: docker.elastic.co/elasticsearch/elasticsearch:5.6.16
+        environment:
+          - cluster.name: es
+          - xpack.security.enabled: false
+          - transport.host: localhost
+          - network.host: 127.0.0.1
+          - http.port: 9250
+          - discovery.type: single-node
     environment:
       NODE_ENV: "testing"
     steps:
@@ -35,24 +51,27 @@ jobs:
           at: ~/code-gov-adapters
       - run:
           name: download-cc-test-reporter
-          command: curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          command: |
+            mkdir -p tmp/
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./tmp/cc-test-reporter
+            chmod +x ./tmp/cc-test-reporter
       - run:
           name: make-test-reporter-executable
-          command: chmod +x ./cc-test-reporter
+          command: chmod +x ./tmp/cc-test-reporter
       - run:
-          command: ./cc-test-reporter before-build
+          command: ./tmp/cc-test-reporter before-build
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: run-test
-          command: npm test
+          command: npm run test
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - node_modules
-      - run:
-          name: upload-test-report
-          command: ./cc-test-reporter after-build -t lcov --exit-code $?
+      #- run:
+      #    name: upload-test-report
+      #    command: ./tmp/cc-test-reporter after-build -t lcov --exit-code $?
       - store_test_results:
           path: test-results
       - store_artifacts:
@@ -62,7 +81,17 @@ jobs:
           root: ~/code-gov-adapters
           paths: .
   publish:
-    <<: *defaults
+    working_directory: ~/code-gov-adapters
+    docker:
+      - image: circleci/node:lts-jessie
+      - image: docker.elastic.co/elasticsearch/elasticsearch:5.6.16
+        environment:
+          - cluster.name: es
+          - xpack.security.enabled: false
+          - transport.host: localhost
+          - network.host: 127.0.0.1
+          - http.port: 9250
+          - discovery.type: single-node
     steps:
       - attach_workspace:
           at: ~/code-gov-adapters
