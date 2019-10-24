@@ -61,7 +61,7 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: run-test
-          command: npm run test-xml
+          command: npm run test
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
