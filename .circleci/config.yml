@@ -57,9 +57,9 @@ jobs:
             chmod +x ./tmp/cc-test-reporter
       - run:
           name: make-test-reporter-executable
-          command: chmod +x ./cc-test-reporter
+          command: chmod +x ./tmp/cc-test-reporter
       - run:
-          command: ./cc-test-reporter before-build
+          command: ./tmp/cc-test-reporter before-build
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
