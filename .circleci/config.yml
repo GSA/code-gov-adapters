@@ -36,6 +36,14 @@ jobs:
     working_directory: ~/code-gov-adapters
     docker:
       - image: circleci/node:lts-jessie
+      - image: docker.elastic.co/elasticsearch/elasticsearch:5.6.16
+        environment:
+          - cluster.name: es
+          - xpack.security.enabled: false
+          - transport.host: localhost
+          - network.host: 127.0.0.1
+          - http.port: 9250
+          - discovery.type: single-node
     environment:
       NODE_ENV: "testing"
     steps:
@@ -73,6 +81,14 @@ jobs:
     working_directory: ~/code-gov-adapters
     docker:
       - image: circleci/node:lts-jessie
+      - image: docker.elastic.co/elasticsearch/elasticsearch:5.6.16
+        environment:
+          - cluster.name: es
+          - xpack.security.enabled: false
+          - transport.host: localhost
+          - network.host: 127.0.0.1
+          - http.port: 9250
+          - discovery.type: single-node
     steps:
       - attach_workspace:
           at: ~/code-gov-adapters
