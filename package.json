@@ -4,7 +4,8 @@
   "description": "A collection of adapters used by Code.gov",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/nyc mocha --opts tests/mocha.opts tests",
+    "test": "./node_modules/.bin/nyc mocha --recursive tests",
+    "test-xml": "./node_modules/.bin/nyc mocha --opts tests/mocha.opts tests",
     "lint": "./node_modules/.bin/eslint .",
     "lint-fix": "./node_modules/.bin/eslint . --fix"
   },
