@@ -42,7 +42,7 @@ jobs:
       - attach_workspace:
           at: ~/code-gov-adapters
       - run:
-          command: ~code-gov-adapters/tmp/cc-test-reporter before-build
+          command: ~/code-gov-adapters/tmp/cc-test-reporter before-build
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
