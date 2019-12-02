@@ -59,7 +59,7 @@ jobs:
           name: Run tests
           command: |
             npm test
-            ./node_modules/.bin/nyc report --reporter=text-lcov > ~code-gov-adapters/tmp/lcov.info
+            ./node_modules/.bin/nyc report --reporter=text-lcov > ~/code-gov-adapters/tmp/lcov.info
             ~/code-gov-adapters/tmp/cc-test-reporter format-coverage -t lcov -o ~/code-gov-adapters/tmp/codeclimate.json ~/code-gov-adapters/tmp/lcov.info
       ##- run:
       ##    name: upload-test-report
