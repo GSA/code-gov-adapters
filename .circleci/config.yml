@@ -27,10 +27,6 @@ jobs:
             mkdir -p ~/code-gov-adapters/tmp
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ~/code-gov-adapters/tmp/cc-test-reporter
             chmod +x ~/code-gov-adapters/tmp/cc-test-reporter
-            ~/code-gov-adapters/tmp/cc-test-reporter before-build
-      - run:
-          name: run-test
-          command: npm test
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
@@ -45,8 +41,8 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/code-gov-adapters
-      #- run:
-      #    command: ./cc-test-reporter before-build
+      - run:
+          command: ~code-gov-adapters/tmp/cc-test-reporter before-build
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
@@ -56,14 +52,17 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - node_modules
-      #- run: 
-      #    name: Run tests
-      #    command: |
-      #      bundle exec rake
-      #      ~/code-gov-adapters/tmp/cc-test-reporter format-coverage -t lcov -o ~/code-gov-adapters/tmp/codeclimate.json ~/code-gov-adapters/tmp/lcov.info
-      - run:
-          name: upload-test-report
-          command: ~/code-gov-adapters/tmp/cc-test-reporter after-build -t lcov --exit-code $?
+      #- run:
+      #    name: run-test
+      #    command: npm test
+      - run: 
+          name: Run tests
+          command: |
+            npm test
+            ~/code-gov-adapters/tmp/cc-test-reporter format-coverage -t lcov -o ~/code-gov-adapters/tmp/codeclimate.json ~/code-gov-adapters/tmp/lcov.info
+      ##- run:
+      ##    name: upload-test-report
+      ##    command: ~/code-gov-adapters/tmp/cc-test-reporter after-build -t lcov --exit-code $?
       #- run:
       #    name: make-test-reporter-executable
       #    command: |
@@ -81,7 +80,7 @@ jobs:
       - run:
           name: Upload coverage results to Code Climate
           command: |
-            ./tmp/cc-test-reporter upload-coverage -i ~/code-gov-adapters/tmp/codeclimate.total.json
+            ~/code-gov-adapters/tmp/cc-test-reporter upload-coverage -i ~/code-gov-adapters/tmp/codeclimate.json
       - persist_to_workspace:
           root: ~/code-gov-adapters
           paths:
