@@ -28,7 +28,9 @@ jobs:
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ~/code-gov-adapters/tmp/cc-test-reporter
             chmod +x ~/code-gov-adapters/tmp/cc-test-reporter
             ~/code-gov-adapters/tmp/cc-test-reporter before-build
-            sudo vendor/bin/phpunit --coverage-clover clover.xml
+      - run:
+          name: run-test
+          command: npm test
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
