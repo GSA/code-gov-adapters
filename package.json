@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/nyc mocha --opts tests/mocha.opts tests",
+    "test-console": "./node_modules/.bin/nyc mocha --opts tests/mocha.opts.console tests",
     "licenses": "license-checker --json --relativeLicensePath --out dependency_licenses.json",
     "lint": "./node_modules/.bin/eslint .",
     "lint-fix": "./node_modules/.bin/eslint . --fix"
