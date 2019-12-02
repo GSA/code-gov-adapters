@@ -27,6 +27,8 @@ jobs:
             mkdir -p ~/code-gov-adapters/tmp
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ~/code-gov-adapters/tmp/cc-test-reporter
             chmod +x ~/code-gov-adapters/tmp/cc-test-reporter
+      - run:
+          name:  pre test
           command: |
             sudo docker-php-ext-enable xdebug
           # notify Code Climate of a pending test report using `before-build`
