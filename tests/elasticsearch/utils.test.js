@@ -103,145 +103,145 @@ describe('parseResponse', () => {
   });
 });
 describe('createFieldSearchQuery', () => {
-  it('should ', () => {
+  it.skip('should ', () => {
     const result = createFieldSearchQuery();
     expect(result).to.equal(false);
   });
 });
 describe('_addMatchPhraseForFullText', () => {
-  it('should ', () => {
+  it.skip('should ', () => {
     const result = _addMatchPhraseForFullText();
     expect(result).to.equal(false);
   });
 });
 describe('_addMatchForFullText', () => {
-  it('should ', () => {
+  it.skip('should ', () => {
     const result = _addMatchForFullText();
     expect(result).to.equal(false);
   });
 });
 describe('_addCommonCutoffForFullText', () => {
-  it('should ', () => {
+  it.skip('should ', () => {
     const result = _addCommonCutoffForFullText();
     expect(result).to.equal(false);
   });
 });
 describe('_addFullTextQuery', () => {
-  it('should ', () => {
+  it.skip('should ', () => {
     const result = _addFullTextQuery();
     expect(result).to.equal(false);
   });
 });
 describe('_processFilterValue', () => {
-  it('should ', () => {
+  it.skip('should ', () => {
     const result = _processFilterValue();
     expect(result).to.equal(false);
   });
 });
 describe('_addStringFilter', () => {
-  it('should ', () => {
+  it.skip('should ', () => {
     const result = _addStringFilter();
     expect(result).to.equal(false);
   });
 });
 describe('_addNestedFilter', () => {
-  it('should ', () => {
+  it.skip('should ', () => {
     const result = _addNestedFilter();
     expect(result).to.equal(false);
   });
 });
 describe('_addStringFilters', () => {
-  it('should ', () => {
+  it.skip('should ', () => {
     const result = _addStringFilters();
     expect(result).to.equal(false);
   });
 });
 describe('_getRanges', () => {
-  it('should ', () => {
+  it.skip('should ', () => {
   const result = _getRanges();
     expect(result).to.equal(false);
   });
 });
 describe('_processDate', () => {
-  it('should ', () => {
+  it.skip('should ', () => {
   const result = _processDate();
     expect(result).to.equal(false);
   });
 });
 describe('_addRangeFilter', () => {
-  it('should ', () => {
+  it.skip('should ', () => {
     const result = _addRangeFilter();
     expect(result).to.equal(false);
   });
 });
 describe('_addDateRangeFilters', () => {
-  it('should ', () => {
+  it.skip('should ', () => {
     const result = _addDateRangeFilters();
     expect(result).to.equal(false);
   });
 });
 describe('_addSizeFromParams', () => {
-  it('should ', () => {
+  it.skip('should ', () => {
     const result = _addSizeFromParams();
     expect(result).to.equal(false);
   });
 });
 describe('_addIncludeExclude', () => {
-  it('should ', () => {
+  it.skip('should ', () => {
     const result = _addIncludeExclude();
     expect(result).to.equal(false);
   });
 });
 describe('_addFieldFilters', () => {
-  it('should ', () => {
+  it.skip('should ', () => {
     const result = _addFieldFilters();
     expect(result).to.equal(false);
   });
 });
 describe('_getSortValues', () => {
-  it('should ', () => {
+  it.skip('should ', () => {
     const result = _getSortValues();
     expect(result).to.equal(false);
   });
 });
 describe('_getSortOptions', () => {
-  it('should ', () => {
+  it.skip('should ', () => {
     const result = _getSortOptions();
     expect(result).to.equal(false);
   });
 });
 describe('_addSortOrder', () => {
-  it('should ', () => {
+  it.skip('should ', () => {
     const result = _addSortOrder();
     expect(result).to.equal(false);
   });
 });
 describe('createReposSearchQuery', () => {
-  it('should ', () => {
+  it.skip('should ', () => {
     const result = createReposSearchQuery();
     expect(result).to.equal(false);
   });
 });
 describe('getTermTypes', () => {
-  it('should ', () => {
+  it.skip('should ', () => {
     const result = getTermTypes();
     expect(result).to.equal(false);
   });
 });
 describe('searchTermsQuery', () => {
-  it('should ', () => {
+  it.skip('should ', () => {
     const result = searchTermsQuery();
     expect(result).to.equal(false);
   });
 });
 describe('getQueryByTerm', () => {
-  it('should ', () => {
+  it.skip('should ', () => {
     const result = getQueryByTerm();
     expect(result).to.equal(false);
   });
 });
 describe('getLanguagesSearchQuery', () => {
-  it('should ', () => {
+  it.skip('should ', () => {
     const result = getLanguagesSearchQuery();
     expect(result).to.equal(false);
   });
