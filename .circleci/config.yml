@@ -52,36 +52,17 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - node_modules
-      #- run:
-      #    name: run-test
-      #    command: npm test
       - run: 
           name: Run tests
           command: |
             npm test
             ./node_modules/.bin/nyc report --reporter=text-lcov > ~/code-gov-adapters/tmp/lcov.info
             ~/code-gov-adapters/tmp/cc-test-reporter format-coverage -t lcov -o ~/code-gov-adapters/tmp/codeclimate.json ~/code-gov-adapters/tmp/lcov.info
-      ##- run:
-      ##    name: upload-test-report
-      ##    command: ~/code-gov-adapters/tmp/cc-test-reporter after-build -t lcov --exit-code $?
-      #- run:
-      #    name: make-test-reporter-executable
-      #    command: |
-      #      sudo docker-php-ext-enable xdebug
-      #    # notify Code Climate of a pending test report using `before-build`
-      #      ./cc-test-reporter before-build
-      #      sudo vendor/bin/phpunit --coverage-clover clover.xml
-      #    # upload test report to Code Climate using `after-build`
-      #      ./cc-test-reporter after-build --coverage-input-type clover --exit-code $?
       - store_test_results:
           path: test-results
       - store_artifacts:
           path: coverage
           prefix: coverage
-      #- run:
-      #    name: Upload coverage results to Code Climate
-      #    command: |
-      #      ~/code-gov-adapters/tmp/cc-test-reporter upload-coverage -i ~/code-gov-adapters/tmp/codeclimate.json
       - persist_to_workspace:
           root: ~/code-gov-adapters
           paths:
