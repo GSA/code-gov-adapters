@@ -27,6 +27,11 @@ jobs:
             mkdir -p ~/code-gov-adapters/tmp
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ~/code-gov-adapters/tmp/cc-test-reporter
             chmod +x ~/code-gov-adapters/tmp/cc-test-reporter
+          command: |
+            sudo docker-php-ext-enable xdebug
+          # notify Code Climate of a pending test report using `before-build`
+            ~/code-gov-adapters/tmp/cc-test-reporter before-build
+            sudo vendor/bin/phpunit --coverage-clover clover.xml
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
@@ -52,14 +57,14 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - node_modules
-      - run: 
-          name: Run tests
-          command: |
-            bundle exec rake
-            ~/code-gov-adapters/tmp/cc-test-reporter format-coverage -t lcov -o ~/code-gov-adapters/tmp/codeclimate.json ~/code-gov-adapters/tmp/lcov.info
-      #- run:
-      #    name: upload-test-report
-      #    command: ./cc-test-reporter after-build -t lcov --exit-code $?
+      #- run: 
+      #    name: Run tests
+      #    command: |
+      #      bundle exec rake
+      #      ~/code-gov-adapters/tmp/cc-test-reporter format-coverage -t lcov -o ~/code-gov-adapters/tmp/codeclimate.json ~/code-gov-adapters/tmp/lcov.info
+      - run:
+          name: upload-test-report
+          command: ~/code-gov-adapters/tmp/cc-test-reporter after-build -t lcov --exit-code $?
       #- run:
       #    name: make-test-reporter-executable
       #    command: |
