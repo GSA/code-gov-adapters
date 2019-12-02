@@ -56,7 +56,7 @@ jobs:
           name: Run tests
           command: |
             bundle exec rake
-            ./tmp/cc-test-reporter format-coverage -t lcov -o ~/code-gov-adapters/tmp/codeclimate.json ~/code-gov-adapters/tmp/lcov.info
+            ~/code-gov-adapters/tmp/cc-test-reporter format-coverage -t lcov -o ~/code-gov-adapters/tmp/codeclimate.json ~/code-gov-adapters/tmp/lcov.info
       #- run:
       #    name: upload-test-report
       #    command: ./cc-test-reporter after-build -t lcov --exit-code $?
