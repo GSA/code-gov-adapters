@@ -1,6 +1,8 @@
-version: 2
+version: 2.0
 defaults: &defaults
   working_directory: ~/code-gov-adapters
+  environment:
+    - CC_TEST_REPORTER_ID: e1477b41ad84c1828f5d
   docker:
     - image: circleci/node:10.8.0
 jobs:
@@ -19,6 +21,12 @@ jobs:
       - run:
           name: run-security-check
           command: npm audit
+      - run:
+          name:  Download cc-test-reporter
+          command: |
+            mkdir -p ~/code-gov-adapters/tmp
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ~/code-gov-adapters/tmp/cc-test-reporter
+            chmod +x ~/code-gov-adapters/tmp/cc-test-reporter
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
@@ -33,12 +41,6 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/code-gov-adapters
-      - run:
-          name: download-cc-test-reporter
-          command: |
-          # download test reporter as a static binary
-            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-            chmod +x ./cc-test-reporter
       #- run:
       #    command: ./cc-test-reporter before-build
       - restore_cache:
@@ -50,26 +52,37 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - node_modules
+      - run: 
+          name: Run tests
+          command: |
+            bundle exec rake
+            ./tmp/cc-test-reporter format-coverage -t lcov -o ~/code-gov-adapters/tmp/codeclimate.json ~/code-gov-adapters/tmp/lcov.info
       #- run:
       #    name: upload-test-report
       #    command: ./cc-test-reporter after-build -t lcov --exit-code $?
-      - run:
-          name: make-test-reporter-executable
-          command: |
-            sudo docker-php-ext-enable xdebug
-          # notify Code Climate of a pending test report using `before-build`
-            ./cc-test-reporter before-build
-            sudo vendor/bin/phpunit --coverage-clover clover.xml
-          # upload test report to Code Climate using `after-build`
-            ./cc-test-reporter after-build --coverage-input-type clover --exit-code $?
+      #- run:
+      #    name: make-test-reporter-executable
+      #    command: |
+      #      sudo docker-php-ext-enable xdebug
+      #    # notify Code Climate of a pending test report using `before-build`
+      #      ./cc-test-reporter before-build
+      #      sudo vendor/bin/phpunit --coverage-clover clover.xml
+      #    # upload test report to Code Climate using `after-build`
+      #      ./cc-test-reporter after-build --coverage-input-type clover --exit-code $?
       - store_test_results:
           path: test-results
       - store_artifacts:
           path: coverage
           prefix: coverage
+      - run:
+          name: Upload coverage results to Code Climate
+          command: |
+            ./tmp/cc-test-reporter upload-coverage -i ~/code-gov-adapters/tmp/codeclimate.total.json
       - persist_to_workspace:
           root: ~/code-gov-adapters
-          paths: .
+          paths:
+            - .
+            - tmp/codeclimate.json
   publish:
     <<: *defaults
     steps:
