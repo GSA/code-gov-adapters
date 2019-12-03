@@ -1,8 +1,6 @@
 version: 2.0
 defaults: &defaults
   working_directory: ~/code-gov-adapters
-  environment:
-    - CC_TEST_REPORTER_ID: e1477b41ad84c1828f5d
   docker:
     - image: circleci/node:10.8.0
 jobs:
@@ -37,7 +35,8 @@ jobs:
   test:
     <<: *defaults
     environment:
-      NODE_ENV: "testing"
+      - NODE_ENV: "testing"
+      - CC_TEST_REPORTER_ID: 598d76b93fa264e5a8fedefdfe163608cbda511652d1792552176a6f68d87264
     steps:
       - attach_workspace:
           at: ~/code-gov-adapters
@@ -55,9 +54,10 @@ jobs:
       - run: 
           name: Run tests
           command: |
+            mkdir coverage
             npm test
-            ./node_modules/.bin/nyc report --reporter=text-lcov > ~/code-gov-adapters/tmp/lcov.info
-            ~/code-gov-adapters/tmp/cc-test-reporter format-coverage -t lcov -o ~/code-gov-adapters/tmp/codeclimate.json ~/code-gov-adapters/tmp/lcov.info
+            ./node_modules/.bin/nyc report --reporter=text-lcov > ./coverage/lcov.info
+            ~/code-gov-adapters/tmp/cc-test-reporter after-build -t lcov --exit-code $?
       - store_test_results:
           path: test-results
       - store_artifacts:
