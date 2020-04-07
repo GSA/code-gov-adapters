@@ -1,6 +1,6 @@
 {
   "name": "@code.gov/code-gov-adapter",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "A collection of adapters used by Code.gov",
   "main": "index.js",
   "scripts": {
@@ -33,7 +33,7 @@
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
-    "mocha": "^5.2.0",
+    "mocha": "^7.1.1",
     "mocha-junit-reporter": "^1.18.0",
     "nock": "^10.0.1",
     "nyc": "^14.1.1"
@@ -41,7 +41,7 @@
   "dependencies": {
     "bodybuilder": "^2.2.15",
     "elasticsearch": "^15.1.1",
-    "license-checker": "^25.0.1",
+    "license-checker": "github:davglass/license-checker#pull/234/head",
     "lodash": "^4.17.15",
     "moment": "^2.22.2"
   }
