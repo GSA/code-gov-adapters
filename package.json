@@ -1,6 +1,6 @@
 {
   "name": "@code.gov/code-gov-adapter",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "description": "A collection of adapters used by Code.gov",
   "main": "index.js",
   "scripts": {
