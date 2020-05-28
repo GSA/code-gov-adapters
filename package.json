@@ -1,6 +1,6 @@
 {
   "name": "@code.gov/code-gov-adapter",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "description": "A collection of adapters used by Code.gov",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,9 @@
     "test-console": "./node_modules/.bin/nyc mocha --opts tests/mocha.opts.console tests",
     "licenses": "license-checker --json --relativeLicensePath --out dependency_licenses.json",
     "lint": "./node_modules/.bin/eslint .",
-    "lint-fix": "./node_modules/.bin/eslint . --fix"
+    "lint-fix": "./node_modules/.bin/eslint . --fix",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -43,6 +45,8 @@
     "elasticsearch": "^15.1.1",
     "license-checker": "github:davglass/license-checker#pull/234/head",
     "lodash": "^4.17.15",
-    "moment": "^2.22.2"
-  }
+    "moment": "^2.22.2",
+    "snyk": "^1.316.1"
+  },
+  "snyk": true
 }
