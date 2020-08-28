@@ -44,7 +44,7 @@
     "bodybuilder": "^2.2.15",
     "elasticsearch": "^15.1.1",
     "license-checker": "github:davglass/license-checker#pull/234/head",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.17",
     "moment": "^2.22.2",
     "snyk": "^1.316.1"
   },
