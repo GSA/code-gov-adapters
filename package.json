@@ -46,7 +46,7 @@
     "license-checker": "github:davglass/license-checker#pull/234/head",
     "lodash": "^4.17.20",
     "moment": "^2.22.2",
-    "snyk": "^1.316.1"
+    "snyk": "^1.465.0"
   },
   "snyk": true
 }
